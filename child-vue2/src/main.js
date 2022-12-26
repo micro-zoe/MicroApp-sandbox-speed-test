@@ -18,48 +18,48 @@ const router = new VueRouter({
 let app = null
 
 // -------------------分割线-micro-app------------------ //
-// if (window.__MICRO_APP_ENVIRONMENT__) {
-//   app = new Vue({
-//     router,
-//     render: h => h(App),
-//   }).$mount('#app')
-  
-//   // 监听卸载
-//   window.unmount = () => {
-//     app.$destroy()
-//     app.$el.innerHTML = ''
-//     app = null
-//   }
-// }
-
-
-// -------------------分割线-qiankun------------------ //
-export async function bootstrap() {
-  console.log('react app bootstraped');
-}
-
-export async function mount(props) {
-  const { container } = props;
+if (window.__MICRO_APP_ENVIRONMENT__) {
   app = new Vue({
     router,
     render: h => h(App),
-  }).$mount(container ? container.querySelector('#app') : '#app')
+  }).$mount('#app')
+  
+  // 监听卸载
+  window.unmount = () => {
+    app.$destroy()
+    app.$el.innerHTML = ''
+    app = null
+  }
 }
 
-export async function unmount() {
-  app.$destroy()
-  app.$el.innerHTML = ''
-  app = null
-}
+
+// -------------------分割线-qiankun------------------ //
+// export async function bootstrap() {
+//   console.log('react app bootstraped');
+// }
+
+// export async function mount(props) {
+//   const { container } = props;
+//   app = new Vue({
+//     router,
+//     render: h => h(App),
+//   }).$mount(container ? container.querySelector('#app') : '#app')
+// }
+
+// export async function unmount() {
+//   app.$destroy()
+//   app.$el.innerHTML = ''
+//   app = null
+// }
 
 
 // -------------------分割线-非微前端------------------ //
-if (!window.__MICRO_APP_ENVIRONMENT__ && !window.__POWERED_BY_QIANKUN__) {
-  new Vue({
-    router,
-    render: h => h(App),
-  }).$mount('#app')
-}
+// if (!window.__MICRO_APP_ENVIRONMENT__ && !window.__POWERED_BY_QIANKUN__) {
+//   new Vue({
+//     router,
+//     render: h => h(App),
+//   }).$mount('#app')
+// }
 
 
 // window.bootstrap = async () => {
